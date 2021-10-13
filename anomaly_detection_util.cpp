@@ -13,7 +13,12 @@ float avg(float* x, int size){
 
 // returns the variance of X and Y
 float var(float* x, int size){
-	return 0;
+	float average = avg(x, size);
+	float variance = 0;
+	for (int i = 0; i < size; i++) {
+		variance += (x[i] - average) * (x[i] - average);
+	}
+	return variance / size;
 }
 
 // returns the covariance of X and Y
