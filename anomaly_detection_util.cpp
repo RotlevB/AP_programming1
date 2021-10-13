@@ -48,14 +48,14 @@ float pearson(float* x, float* y, int size){
 
 // performs a linear regression and returns the line equation
 Line linear_reg(Point** points, int size){
-	auto x = new float[size];
-	auto y = new float[size];
+	float* x = new float[size];
+	float* y = new float[size];
 	for (int i = 0; i < size; i++) {
 		x[i] = points[i]->x;
 		y[i] = points[i]->y;
 	}
-	auto x_avg = avg(x, size);
-	auto y_avg = avg(y, size);
+	float x_avg = avg(x, size);
+	float y_avg = avg(y, size);
 	float a = cov(x, y, size) / var(x, size);
 	float b = y_avg - (a * x_avg);
 	return Line(a, b);
