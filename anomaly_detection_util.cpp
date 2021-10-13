@@ -6,6 +6,7 @@
 
 #include <math.h>
 #include "anomaly_detection_util.h"
+#include<iostream>
 
 float avg(float* x, int size){
 	float average = 0;
@@ -39,7 +40,10 @@ float cov(float* x, float* y, int size){
 
 // returns the Pearson correlation coefficient of X and Y
 float pearson(float* x, float* y, int size){
-	return 0;
+	float covariance = cov(x, y, size);
+	double x_variance = (double) var(x, size);
+	double y_variance = (double) var(y, size);
+	return covariance / (float)(sqrt(x_variance * y_variance));
 }
 
 // performs a linear regression and returns the line equation
