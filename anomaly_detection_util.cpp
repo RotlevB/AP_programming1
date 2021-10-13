@@ -8,7 +8,11 @@
 #include "anomaly_detection_util.h"
 
 float avg(float* x, int size){
-	return 0;
+	float var_avg = 0;
+	for (int i = 0; i < size; i++) {
+		var_avg += x[i];
+	}
+	return var_avg/size;
 }
 
 // returns the variance of X and Y
