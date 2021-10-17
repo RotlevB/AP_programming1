@@ -45,7 +45,7 @@ float pearson(float* x, float* y, int size){
 	float covariance = cov(x, y, size);
 	float x_variance = var(x, size);
 	float y_variance = var(y, size);
-	return covariance / (sqrt(x_variance) * sqrt(y_variance));
+	return covariance / (sqrt(x_variance * y_variance));
 }
 
 // performs a linear regression and returns the line equation
@@ -72,7 +72,7 @@ float dev(Point p,Point** points, int size){
 
 // returns the deviation between point p and the line
 float dev(Point p,Line l){
-	return abs(p.y - l.f(p.x));
+	return fabs(p.y - l.f(p.x));
 }
 
 
