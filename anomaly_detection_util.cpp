@@ -32,18 +32,20 @@ float cov(float* x, float* y, int size){
 	float y_avg = avg(y, size);
 	float covariance = 0;
 	for (int i = 0; i < size; i++) {
-		covariance += (x[i] - x_avg) * (y[i] - y_avg);
+		covariance += (x[i]) * (y[i]);
 	}
-	return covariance / size;
+	covariance /= size;
+	covariance -= x_avg * y_avg;
+	return covariance;
 }
 
 
 // returns the Pearson correlation coefficient of X and Y
 float pearson(float* x, float* y, int size){
 	float covariance = cov(x, y, size);
-	double x_variance = (double) var(x, size);
-	double y_variance = (double) var(y, size);
-	return covariance / (float)(sqrt(x_variance * y_variance));
+	float x_variance = var(x, size);
+	float y_variance = var(y, size);
+	return covariance / (sqrt(x_variance) * sqrt(y_variance));
 }
 
 // performs a linear regression and returns the line equation
@@ -58,6 +60,8 @@ Line linear_reg(Point** points, int size){
 	float y_avg = avg(y, size);
 	float a = cov(x, y, size) / var(x, size);
 	float b = y_avg - (a * x_avg);
+	delete[] x;
+	delete[] y;
 	return Line(a, b);
 }
 
@@ -68,7 +72,7 @@ float dev(Point p,Point** points, int size){
 
 // returns the deviation between point p and the line
 float dev(Point p,Line l){
-	return fabs(l.f(p.x) - p.y);
+	return abs(p.y - l.f(p.x));
 }
 
 
