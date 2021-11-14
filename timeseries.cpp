@@ -14,7 +14,16 @@ vector<string> TimeSeries::splitString(string line, string token) {
 }
 
 vector<vector<float>> TimeSeries::getColums() {
-
+	vector<vector<float>> colums = vector<vector<float>>();
+	vector<float> temp;
+	for (int i = 0; i < this->titles.size(); i++) {
+		temp = vector<float>();
+		for (vector<float> v : this->rows) {
+			temp.push_back(v[i]);
+		}
+		colums.push_back(temp);
+	}
+	return colums;
 }
 string TimeSeries::nameByNum(int i) {
 	if (i < 0 || i >= this->titles.size()) {
