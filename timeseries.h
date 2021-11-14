@@ -3,8 +3,8 @@
 #ifndef TIMESERIES_H_
 #define TIMESERIES_H_
 
-#include <unordered_map>
-#include<fstream>
+#include<iostream>
+#include <fstream>
 using namespace std;
 
 class TimeSeries{
@@ -23,7 +23,18 @@ public:
 	vector<string> splitString(string line, string token);
 	TimeSeries(const char* CSVfileName){
 		ifstream myfile(CSVfileName);
-
+		string line;
+		this->rows = vector<vector<float>>();
+		getline(myfile, line);
+		int i = 0;
+		this->titles = splitString(line, ",");
+		while (getline(myfile, line)) {
+			rows.push_back(vector<float>());
+			for (string str : splitString(line, ",")) {
+				rows[i].push_back(stof(str);
+			}
+			i++;
+		}
 	}
 
 };
