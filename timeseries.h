@@ -3,8 +3,10 @@
 #ifndef TIMESERIES_H_
 #define TIMESERIES_H_
 
-#include<iostream>
 #include <fstream>
+#include<vector>
+#include<iostream>
+#include <string>
 using namespace std;
 
 class TimeSeries{
@@ -20,6 +22,7 @@ public:
 	vector<float> getRow(int i);
 	float getVal(int i, int j);
 	int rowCount();
+
 	vector<string> splitString(string line, string token);
 	TimeSeries(const char* CSVfileName){
 		ifstream myfile(CSVfileName);
@@ -31,7 +34,7 @@ public:
 		while (getline(myfile, line)) {
 			rows.push_back(vector<float>());
 			for (string str : splitString(line, ",")) {
-				rows[i].push_back(stof(str);
+				rows[i].push_back(stof(str));
 			}
 			i++;
 		}

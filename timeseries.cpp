@@ -17,10 +17,15 @@ vector<vector<float>> TimeSeries::getColums() {
 
 }
 string TimeSeries::nameByNum(int i) {
-
+	if (i < 0 || i >= this->titles.size()) {
+		return "";
+	}
+	return this->titles[i];
 }
 vector<float> TimeSeries::getRow(int i) {
-
+	if (i < 0 || i >= this->rows.size()) {
+		return vector<float>();
+	}
 }
 float TimeSeries::getVal(int i, int j) {
 
