@@ -17,7 +17,7 @@ private:
 	
 public:
 
-	vector<vector<float>> getColums();
+	vector<vector<float>> getColumns();
 	string nameByNum(int i);
 	vector<float> getRow(int i);
 	float getVal(int i, int j);

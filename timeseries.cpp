@@ -13,17 +13,21 @@ vector<string> TimeSeries::splitString(string line, string token) {
 	return split;
 }
 
-vector<vector<float>> TimeSeries::getColums() {
-	vector<vector<float>> colums = vector<vector<float>>();
+/// <summary>
+/// returns data as columns vector
+/// </summary>
+/// <returns></returns>
+vector<vector<float>> TimeSeries::getColumns() {
+	vector<vector<float>> columns = vector<vector<float>>();
 	vector<float> temp;
 	for (int i = 0; i < this->titles.size(); i++) {
 		temp = vector<float>();
 		for (vector<float> v : this->rows) {
 			temp.push_back(v[i]);
 		}
-		colums.push_back(temp);
+		columns.push_back(temp);
 	}
-	return colums;
+	return columns;
 }
 
 /// <summary>
@@ -70,6 +74,10 @@ float TimeSeries::getVal(int i, int j) {
 	return v[j];
 }
 
+/// <summary>
+/// returns row count
+/// </summary>
+/// <returns></returns>
 int TimeSeries::rowCount() {
 	return this->rows.size();
 }
