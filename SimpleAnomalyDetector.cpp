@@ -84,7 +84,6 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
 		str = this->checkLine(ts, i);
 		if (str.compare("") != 0) {
 			ar.push_back(AnomalyReport(str, long(i+1)));
-			cout << str << endl;
 		}
 	}
 	return ar;
