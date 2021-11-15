@@ -19,6 +19,7 @@ public:
 
 	vector<vector<float>> getColumns() const;
 	string nameByNum(int i) const;
+	int indxByStr(string str) const;
 	vector<float> getRow(int i) const;
 	float getVal(int i, int j) const;
 	int rowCount() const;

@@ -44,6 +44,23 @@ string TimeSeries::nameByNum(int i) const {
 }
 
 /// <summary>
+/// returns index of a title
+/// throws exception if title doesnt exist
+/// </summary>
+/// <param name="str"></param>
+/// <returns></returns>
+int TimeSeries::indxByStr(string str) const {
+	int i = -1;
+	for (string s : this->titles) {
+		i++;
+		if (s.compare(str) == 0) {
+			return i;
+		}
+	}
+	throw "non existant title";
+}
+
+/// <summary>
 /// returns row_vector by index
 /// throws exceptios if index is out of bound
 /// </summary>
