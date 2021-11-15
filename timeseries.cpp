@@ -17,7 +17,7 @@ vector<string> TimeSeries::splitString(string line, string token) {
 /// returns data as columns vector
 /// </summary>
 /// <returns></returns>
-vector<vector<float>> TimeSeries::getColumns() {
+vector<vector<float>> TimeSeries::getColumns() const {
 	vector<vector<float>> columns = vector<vector<float>>();
 	vector<float> temp;
 	for (int i = 0; i < this->titles.size(); i++) {
@@ -36,7 +36,7 @@ vector<vector<float>> TimeSeries::getColumns() {
 /// </summary>
 /// <param name="i"></param>
 /// <returns></returns>
-string TimeSeries::nameByNum(int i) {
+string TimeSeries::nameByNum(int i) const {
 	if (i < 0 || i >= this->titles.size()) {
 		throw "out of bound";
 	}
@@ -49,7 +49,7 @@ string TimeSeries::nameByNum(int i) {
 /// </summary>
 /// <param name="i"></param>
 /// <returns></returns>
-vector<float> TimeSeries::getRow(int i) {
+vector<float> TimeSeries::getRow(int i) const {
 	if (i < 0 || i >= this->rows.size()) {
 		throw "out of bound";
 	}
@@ -63,7 +63,7 @@ vector<float> TimeSeries::getRow(int i) {
 /// <param name="i"></param>
 /// <param name="j"></param>
 /// <returns></returns>
-float TimeSeries::getVal(int i, int j) {
+float TimeSeries::getVal(int i, int j) const {
 	if (i < 0 || i >= this->rows.size()) {
 		throw "i out of bound";
 	}
@@ -78,6 +78,6 @@ float TimeSeries::getVal(int i, int j) {
 /// returns row count
 /// </summary>
 /// <returns></returns>
-int TimeSeries::rowCount() {
+int TimeSeries::rowCount() const {
 	return this->rows.size();
 }

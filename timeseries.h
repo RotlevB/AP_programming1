@@ -17,11 +17,11 @@ private:
 	
 public:
 
-	vector<vector<float>> getColumns();
-	string nameByNum(int i);
-	vector<float> getRow(int i);
-	float getVal(int i, int j);
-	int rowCount();
+	vector<vector<float>> getColumns() const;
+	string nameByNum(int i) const;
+	vector<float> getRow(int i) const;
+	float getVal(int i, int j) const;
+	int rowCount() const;
 
 	vector<string> splitString(string line, string token);
 	TimeSeries(const char* CSVfileName){
