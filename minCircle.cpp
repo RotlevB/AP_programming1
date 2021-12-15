@@ -14,51 +14,47 @@ bool isInCircle(Circle c, Point* p) {
 }
 
 Circle findMinCircle(Point** points, size_t size) {
-	unordered_set<Point*> p;
-	unordered_set<Point*> r;
+	vector<Point*> p;
+	vector<Point*> r;
 	for (int i = 0; i < size; i++) {
-		p.insert(points[i]);
+		p.push_back(points[i]);
 	}
 	return findMinCircle(p, r);
 }
 
-Point* randomElement(unordered_set<Point*>& p) {
+Point* randomElement(vector<Point*>& p) {
 	// put some elements into the set
 
-	int bnum = p.bucket_count(); // get the number of buckets
+	int size = p.size(); // get the number of buckets
 	srand(time(0)); // random number generator (seeded with time(0))
-	int rb = rand() % bnum;
-	auto it = p.begin(rb);
-	return *it;
+	int i = rand() % size;
+	swap(p[i], p[p.size() - 1]);
+	return p[p.size() - 1];
 }
 
-Circle findMinCircle(unordered_set<Point*>& p, unordered_set<Point*>& r) {
+Circle findMinCircle(vector<Point*>& p, vector<Point*>& r) {
 	if (p.size() == 0 || r.size() == 3) {
-		vector<Point*> points;
-		for (Point* point : r) {
-			points.push_back(point);
-		}
-		return trivial(points);
+		return trivial(r);
 	}
 	Point* point = randomElement(p);
-	p.erase(point);
+	p.pop_back();
 	Circle c = findMinCircle(p, r);
 	if (isInCircle(c, point)) {
-		p.insert(point);
+		p.push_back(point);
 		return c;
 	}
 	else {
-		r.insert(point);
+		r.push_back(point);
 		c = findMinCircle(p, r);
-		r.erase(point);
-		p.insert(point);
+		r.pop_back();
+		p.push_back(point);
 		return c;
 	}
 }
 
 Circle makeCircle(const Point* p1, const Point* p2)
 {
-	return {{average(p1->x, p2->x), average(p1->y, p2->y)}, (distance(p1, p2) / 2.0)};
+	return Circle(Point(average(p1->x, p2->x), average(p1->y, p2->y)), distance(p1, p2) / 2.0);
 }
 
 Circle makeCircle(const Point* p1, const Point* p2, const Point* p3)
@@ -66,7 +62,7 @@ Circle makeCircle(const Point* p1, const Point* p2, const Point* p3)
 	Point temp = calculateCircleCenter((p2->x - p1->x), (p2->y - p1->y), (p3->x - p1->x), (p3->y - p1->y));
 	temp.x += p1->x;
 	temp.y += p1->y;
-	return {temp, distance(&temp, p1)};
+	return Circle(temp, distance(&temp, p1));
 }
 
 Point calculateCircleCenter(double p1x, double p1y, double p2x, double p2y)
@@ -74,13 +70,13 @@ Point calculateCircleCenter(double p1x, double p1y, double p2x, double p2y)
 	double P1 = p1x * p1x + p1y * p1y;
 	double P2 = p2x * p2x + p2y * p2y;
 	double D = 2 * (p1x * p2y - p2x * p1y);
-	return {(P1 * p2y - P2 * p1y) / D, (P2 * p1x - P1 * p2x) / D};
+	return Point((P1 * p2y - P2 * p1y) / D, (P2 * p1x - P1 * p2x) / D);
 }
 
 bool isTrueCircle(const vector<Point*> points, const Circle &c)
 {
-	for (const Point& p : points) {
-		if (!isInCircle(c, points)) {
+	for (Point* p : points) {
+		if (!isInCircle(c, p)) {
 			return false;
 		}
 	}
@@ -89,17 +85,16 @@ bool isTrueCircle(const vector<Point*> points, const Circle &c)
 
 Circle trivial(vector<Point*> points) {
 	int size_of_vector = points.size();
-	assert(size_of_vector <= 3);
 	if (points.empty()) {
 		Circle c = {{0, 0}, 0};
 		return c;
 	}
 	else if (size_of_vector == 1) {
-		Circle c = { points[0], 0 };
+		Circle c = Circle(*points[0], 0);
 		return c;
 	}
 	else if (size_of_vector == 2) {
-		Circle c = { points[0], points[1] };
+		Circle c = makeCircle(points[0], points[1]);
 		return c;
 	}
 	for (int i = 0; i < 3; i++) {

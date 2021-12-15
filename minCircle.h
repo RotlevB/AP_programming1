@@ -23,9 +23,9 @@ public:
 };
 // --------------------------------------
 bool isInCircle(Circle c, Point* p);
-Point* randomElement(unordered_set<Point*>& p);
+Point* randomElement(vector<Point*>& p);
 Circle findMinCircle(Point** points,size_t size);
-Circle findMinCircle(unordered_set<Point*> &p, unordered_set<Point*> &r);
+Circle findMinCircle(vector<Point*>& p, vector<Point*>& r);
 Circle trivial(vector<Point*> points);
 double average(double num1, double num2);
 double distance(const Point* p1, const Point* p2);
