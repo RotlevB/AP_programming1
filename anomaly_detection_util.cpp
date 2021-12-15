@@ -1,7 +1,8 @@
 /*
  * animaly_detection_util.cpp
  *
- * Author: write your ID and name here
+ * Author: 211468343 Nofar Bart
+ *		   Ben Rotlev
  */
 
 #include <math.h>
