@@ -14,21 +14,21 @@ bool isInCircle(Circle c, Point* p) {
 }
 
 Circle findMinCircle(Point** points, size_t size) {
-	vector<Point*> p;
+	vector<Point*> p(points, points + size);
 	vector<Point*> r;
-	for (int i = 0; i < size; i++) {
+	/*for (int i = 0; i < size; i++) {
 		p.push_back(points[i]);
-	}
+	}*/
 	return findMinCircle(p, r);
 }
 
 Point* randomElement(vector<Point*>& p) {
 	// put some elements into the set
 
-	int size = p.size(); // get the number of buckets
-	srand(time(0)); // random number generator (seeded with time(0))
-	int i = rand() % size;
-	swap(p[i], p[p.size() - 1]);
+	//int size = p.size(); // get the number of buckets
+	//srand(time(0)); // random number generator (seeded with time(0))
+	//int i = rand() % size;
+	//swap(p[i], p[p.size() - 1]);
 	return p[p.size() - 1];
 }
 
@@ -36,11 +36,14 @@ Circle findMinCircle(vector<Point*>& p, vector<Point*>& r) {
 	if (p.size() == 0 || r.size() == 3) {
 		return trivial(r);
 	}
-	Point* point = randomElement(p);
+	int i = rand() % p.size();
+	swap(p[i], p[p.size() - 1]);
+	Point* point = p[p.size() - 1]; //randomElement(p);
 	p.pop_back();
 	Circle c = findMinCircle(p, r);
 	if (isInCircle(c, point)) {
 		p.push_back(point);
+		swap(p[i], p[p.size() - 1]);
 		return c;
 	}
 	else {
@@ -48,6 +51,7 @@ Circle findMinCircle(vector<Point*>& p, vector<Point*>& r) {
 		c = findMinCircle(p, r);
 		r.pop_back();
 		p.push_back(point);
+		swap(p[i], p[p.size() - 1]);
 		return c;
 	}
 }
@@ -83,7 +87,7 @@ bool isTrueCircle(const vector<Point*> points, const Circle &c)
 	return true;
 }
 
-Circle trivial(vector<Point*> points) {
+Circle trivial(vector<Point*>& points) {
 	int size_of_vector = points.size();
 	if (points.empty()) {
 		Circle c = {{0, 0}, 0};
@@ -97,14 +101,14 @@ Circle trivial(vector<Point*> points) {
 		Circle c = makeCircle(points[0], points[1]);
 		return c;
 	}
-	for (int i = 0; i < 3; i++) {
+	/*for (int i = 0; i < 3; i++) {
 		for (int j = i + 1; j < 3; j++) {
 			Circle c = makeCircle(points[i], points[j]);
 			if (isTrueCircle(points, c)) {
 				return c;
 			}
 		}
-	}
+	}*/
 	return makeCircle(points[0], points[1], points[2]);
 }
 
