@@ -8,6 +8,7 @@
 #include <time.h>       /* time */
 #include "anomaly_detection_util.h"
 #include<unordered_set>
+#include<math.h>
 
 using namespace std;
 
@@ -21,7 +22,8 @@ public:
 	Circle(Point c,float r):center(c),radius(r){}
 };
 // --------------------------------------
-
+bool isInCircle(Circle c, Point* p);
+Point* randomElement(unordered_set<Point*>& p);
 Circle findMinCircle(Point** points,size_t size);
 Circle findMinCircle(unordered_set<Point*> &p, unordered_set<Point*> &r);
 Circle trivial(vector<Point*> points);
