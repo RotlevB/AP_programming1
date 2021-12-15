@@ -1,8 +1,8 @@
 /*
  * animaly_detection_util.cpp
  *
- * Author: 211468343 Nofar Bart
- *		   Ben Rotlev
+ * Author: Nofar Bart 211468343
+ * Author: Ben Rotlevy 315350868
  */
 
 #include <math.h>
