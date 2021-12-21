@@ -79,7 +79,11 @@ Point calculateCircleCenter(double p1x, double p1y, double p2x, double p2y)
 
 bool isTrueCircle(const vector<Point*> points, const Circle &c)
 {
+<<<<<<< Updated upstream
 	for (Point* p : points) {
+=======
+	for (const Point &p : points) {
+>>>>>>> Stashed changes
 		if (!isInCircle(c, p)) {
 			return false;
 		}
