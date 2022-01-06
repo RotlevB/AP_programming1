@@ -89,3 +89,11 @@ vector<AnomalyReport> SimpleAnomalyDetector::detect(const TimeSeries& ts){
 	return ar;
 }
 
+void SimpleAnomalyDetector::setThreshold(float threshold) {
+	this->threshold = threshold;
+	return;
+}
+float SimpleAnomalyDetector::getTreshold() {
+	return this->threshold;
+}
+

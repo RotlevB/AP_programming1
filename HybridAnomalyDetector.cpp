@@ -87,3 +87,12 @@ vector<correlatedFeatures> HybridAnomalyDetector::getNormalModel() {
 	nm.insert(nm.end(), cf.begin(), cf.end());
 	return nm;
 }
+
+void HybridAnomalyDetector::setThreshold(float threshold) {
+	SimpleAnomalyDetector::setThreshold(threshold);
+	this->threshold = threshold;
+	return;
+}
+float HybridAnomalyDetector::getTreshold() {
+	return this->threshold;
+}

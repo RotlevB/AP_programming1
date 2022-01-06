@@ -16,6 +16,8 @@ public:
 	virtual void learnNormal(const TimeSeries& ts);
 	virtual vector<AnomalyReport> detect(const TimeSeries& ts);
 	vector<correlatedFeatures> getNormalModel();
+	virtual void setThreshold(float threshold);
+	virtual float getTreshold();
 };
 
 #endif /* HYBRIDANOMALYDETECTOR_H_ */
