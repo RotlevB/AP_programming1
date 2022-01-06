@@ -9,6 +9,8 @@
 #include <string>
 using namespace std;
 
+vector<string> splitString(string line, string token);
+
 class TimeSeries{
 private:
 
@@ -24,7 +26,6 @@ public:
 	float getVal(int i, int j) const;
 	int rowCount() const;
 
-	vector<string> splitString(string line, string token);
 	TimeSeries(const char* CSVfileName){
 		ifstream myfile(CSVfileName);
 		string line;

@@ -1,7 +1,7 @@
 #include "timeseries.h"
 
 
-vector<string> TimeSeries::splitString(string line, string token) {
+vector<string> splitString(string line, string token) {
 	vector<string> split;
 	int position = line.find(token);
 	while (position != string::npos) {

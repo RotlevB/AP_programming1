@@ -29,6 +29,8 @@ public:
 	virtual string checkLine(const TimeSeries& ts, int i) const;
 	virtual void learnNormal(const TimeSeries& ts);
 	virtual vector<AnomalyReport> detect(const TimeSeries& ts);
+	virtual void setThreshold(float threshold);
+	virtual float getTreshold();
 
 	vector<correlatedFeatures> getNormalModel(){
 		return cf;
