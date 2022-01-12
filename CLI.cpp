@@ -30,6 +30,8 @@ void CLI::start(){
 
 CLI::~CLI() {
 	delete this->data;
-
+	for (Command* cp : this->commands) {
+		delete cp;
+	}
 }
 

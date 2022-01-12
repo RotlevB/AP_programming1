@@ -5,7 +5,7 @@
 
 #include<iostream>
 #include <string.h>
-
+#include<sstream>
 #include <fstream>
 #include <vector>
 #include "HybridAnomalyDetector.h"
@@ -192,9 +192,15 @@ public:
 			}
 		}
 		tp /= p;
+		tp = floorf(tp * 1000) / 1000;
 		fp /= n;
-		dio->write("True Positive Rate: " + to_string(tp) + "\n");
-		dio->write("False Positive Rate: " + to_string(fp) + "\n");
+		fp = floorf(fp * 1000) / 1000;
+		stringstream fps;
+		stringstream tps;
+		tps << tp;
+		fps << fp;
+		dio->write("True Positive Rate: " + tps.str() + "\n");
+		dio->write("False Positive Rate: " + fps.str() + "\n");
 		return;
 	}
 };
