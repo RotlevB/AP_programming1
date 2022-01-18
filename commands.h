@@ -9,6 +9,9 @@
 #include <fstream>
 #include <vector>
 #include "HybridAnomalyDetector.h"
+#include <unistd.h>
+#include "sys/socket.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -21,6 +24,41 @@ public:
 	virtual ~DefaultIO(){}
 
 	// you may add additional methods here
+};
+
+class socketIO : public DefaultIO {
+	int ID;
+public:
+	socketIO(int ID) : ID(ID) {}
+
+	virtual string read() {
+		string str = "";
+		char c = 0;
+		::read(ID, &c, sizeof(char));
+		while (c != '\n') {
+			str += c;
+			::read(ID, &c, sizeof(char));
+		}
+		return str;
+	}
+
+	virtual void write(string text) {
+		::write(ID, text.c_str(), text.size());
+	}
+
+
+	virtual void write(float f) {
+		write(to_string((f)));
+	};
+
+	virtual void read(float* f) {
+		string str = "";
+		str = this->read();
+		*f = stof(str.c_str());
+	}
+
+	virtual ~socketIO() {}
+
 };
 
 // you may add here helper classes
