@@ -6,6 +6,7 @@ Server::Server(int port)throw (const char*) {
     if (serverFD < 0) {
         throw "socket error!";
     }
+    this->threadpool = vector<thread*>();
     limit = 5;
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
@@ -37,7 +38,7 @@ void Server::start(ClientHandler& ch)throw(const char*){
         while (!willStop) { // shouldStop is changed only by stop() method
             if (threadpool.size() < limit) {
                 try {
-                    //threadpool.push_back(new thread(&Server::acceptClient, this, ch));
+                    //threadpool.push_back(new thread(&Server::acceptClient, this, &ch));
                     acceptClient(ch);
                 }
                 catch (const char* msg) {
@@ -64,6 +65,7 @@ void Server::start(ClientHandler& ch)throw(const char*){
 }
 
 void Server::stop(){
+    willStop = true;
 	t->join(); // do not delete this!
 }
 
